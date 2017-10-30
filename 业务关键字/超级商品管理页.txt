@@ -1,0 +1,21 @@
+*** Settings ***
+Library           ECommerce
+
+*** Keywords ***
+超级商品编辑页:获取长名称
+    getSupGoodsLNameOfEdit
+
+输入搜索内容
+    searContInput
+
+点击搜索按钮
+    searchButton
+
+点击商品列表第一行的生效
+    effectButton
+
+获取商品列表第一行的文案
+    geteffectText
+
+确认生效
+    confirmOfEffect

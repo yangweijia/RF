@@ -1,0 +1,26 @@
+*** Settings ***
+Library           ECommerce
+
+*** Keywords ***
+上传品牌配图
+    [Arguments]    ${pic}
+    brandManage_uploadPic    ${pic}
+
+创建成功提示
+    brandManage_newBrand_success
+
+添加品牌别名
+    brandManage_AddbrandNick
+
+点击保存品牌
+
+点击新建品牌
+    brandManage_newBrand
+
+输入品牌别名
+    [Arguments]    ${nick}
+    brandManage_brandNick    ${nick}
+
+输入品牌名
+    [Arguments]    ${brandName}
+    brandManage_brandName    ${brandName}

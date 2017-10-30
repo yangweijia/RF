@@ -1,0 +1,48 @@
+*** Settings ***
+Library           ECommerceLibrary
+
+*** Keywords ***
+输入订单ID
+    [Arguments]    ${id}
+    orderIdOfSearchInput    ${id}
+
+输入商品ID或者超级商品ID
+    [Arguments]    ${id}
+    goodsIdOfSearchInput    ${id}
+
+点击搜索
+    searchButton
+
+批量发货导出
+    batchConfirmButton
+
+点击导出
+    exportButton
+
+点击确认批量订单按钮
+    confirmOfBatchButton
+
+点击发货按钮
+    deliverButton
+
+选择数量
+    [Arguments]    @{num}
+    numSelect    @{num}
+
+输入快递公司
+    [Arguments]    ${mailCompany}
+    mailCompanyInput    ${mailCompany}
+
+输入快递费用
+    [Arguments]    ${mailCost}
+    mailCostInput    ${mailCost}
+
+输入快递单号
+    [Arguments]    ${mailCode}
+    mailCodeInput    ${mailCode}
+
+点击确认按钮
+    confirmOfDeliverButton
+
+获取提示文案
+    getTipText

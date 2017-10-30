@@ -1,0 +1,85 @@
+*** Settings ***
+Resource          业务关键字/商品管理.txt
+Resource          业务关键字/通用关键字.txt
+Library           ECommerceLibrary
+
+*** Variables ***
+${url}            https://admin.codoon.com/admin/html/item-creator-test.html#!new
+${thirdBoss}      thirdBoss
+${subThirdBoss}    subThirdBoss
+${thirdManage}    thirdManage
+${thirdOper}      thirdOper
+${selfBoss}       selfBoss
+${selfManage}     selfManage
+${selfOper}       selfOper
+${oper}           oper
+${superDev}       superDev
+${service}        service
+
+*** Test Cases ***
+testcase_001
+    [Documentation]    三方商户创建超级商品
+    [Setup]    login    admin    admin    ${url}
+    新增商品页:输入商品名称    超级运动跑鞋
+    新增商品页:输入商品描述    智能连接智能连接智能连接智能连接智能连接
+    新增商品页:输入商品广告    广告
+    新增商品页:输入sku名称    尺码
+    新增商品页:限购数量    0
+    新增商品页:输入市场价    99.99
+    新增商品页:是否使用卡币    ${true}
+    新增商品页:是否显示正品保证    ${true}
+    新增商品页:是否可用优惠券    ${false}
+    新增商品页:上传商品配图    2    ${CURDIR}/picture/1.png    ${CURDIR}/picture/2.png
+    新增商品页:编辑图文详情    ${CURDIR}/picture/1.png
+    新增商品页:一级商品分类    颜色
+    新增商品页:二级商品分类    黑色
+    新增商品页:输入商品品牌    阿迪达斯
+    新增关联按钮
+    #Sku构建
+    添加SKU一级属性    颜色    红色红色红色红色红色红色红色红色红色    翠绿
+    添加SKU二级属性    尺码    大大大大大大大大大大大大大大大大大大    小
+    商品详情创建:是否邮寄    ${true}
+    商品详情创建:输入邮费    0
+    商品详情创建:是否支持退货    ${true}    thirdManage
+    商品详情创建:是否结算    ${true}    thirdManage
+    跳转Sku配置
+    单条配置sku    ${1}    ${2}    ${1}    ${2}    ${1}    ${20}
+    ...    ${none}    ${true}    ${none}    50
+    # 批量sku
+    打开批量sku弹框    ${1}    ${2}    ${1}    ${2}    ${true}
+    批量配置sku价格:所有SKU价格相同
+    批量配置sku数量:所有SKU数量相同
+    批量配置sku扣点:所有SKU扣点相同
+    批量配置sku:确认
+    批量配置sku:配置完毕
+    sleep    10
+    ${name}    超级商品编辑:获取长名称
+    断言-等于    ${name}    超级运动跑鞋
+
+testcase_002
+    [Documentation]    三方商户创建普通商品
+    [Setup]    login    admin    admin    ${url}
+    新增商品页:输入商品名称    普通跑鞋
+    新增商品页:输入商品描述    智能连接
+    新增商品页:输入sku名称    颜色
+    新增商品页:输入市场价    99.99
+    新增商品页:上传商品配图    2    ${CURDIR}/picture/1.png    ${CURDIR}/picture/2.png
+    新增商品页:一级商品分类    颜色
+    新增商品页:二级商品分类    黑色
+    新增商品页:输入商品品牌    阿迪达斯
+    新增关联按钮
+    #Sku构建
+    添加SKU一级属性    颜色    红色    翠绿
+    跳转Sku配置
+    单条配置sku    ${1}    ${2}    ${0}    ${0}    ${1}    ${50}
+    ...    ${none}    ${true}    ${none}    50
+    # 批量sku
+    打开批量sku弹框    ${1}    ${2}    ${0}    ${0}    ${true}
+    批量配置sku价格:所有SKU价格相同
+    批量配置sku数量:所有SKU数量相同
+    批量配置sku扣点:所有SKU扣点相同
+    批量配置sku:确认
+    批量配置sku:配置完毕
+    sleep    5
+    ${name}    商品编辑页:获取商品名称
+    断言-等于    ${name}    普通跑鞋

@@ -1,0 +1,33 @@
+*** Settings ***
+Library           ../lib/CodoonAssert.py
+Library           ECommerce
+
+*** Keywords ***
+截屏
+
+等待页面元素出现
+
+等待页面元素消失
+
+断言-等于
+    [Arguments]    ${first}    ${second}
+    assert equal    ${first}    ${second}
+
+断言-不等于
+    [Arguments]    ${first}    ${second}
+    assert not equal    ${first}    ${second}
+
+断言-为真
+    [Arguments]    ${arg}
+    assert true    ${arg}
+
+断言-为假
+    [Arguments]    ${arg}
+    assert false    ${arg}
+
+页面跳转
+    [Arguments]    ${url}
+    get_url
+
+窗口全屏
+    max wind

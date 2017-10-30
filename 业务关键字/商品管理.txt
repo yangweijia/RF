@@ -1,0 +1,208 @@
+*** Settings ***
+Library           ECommerceLibrary
+
+*** Keywords ***
+点击新增商品
+    [Arguments]    ${name}    ${desc}    ${adv}=${null}
+    [Documentation]    用法： 用于创建商品时，商品名称、商品描述、商品广告词的填写
+    ...
+    ...    @param name: 输入的商品名称（必填）
+    ...
+    ...    @param desc: 输入的商品描述（必填）
+    ...
+    ...    @param name: 商品广告词，默认为null（选填）
+    newGoodsButton
+
+新增商品页:输入商品名称
+    [Arguments]    ${name}
+    goodsNameInput    ${name}
+
+新增商品页:限购数量
+    [Arguments]    ${count}=0
+    [Documentation]    count 默认值为0（不限购）
+    limitCountInput    ${count}
+
+新增商品页:输入市场价
+    [Arguments]    ${price}
+    marketPriceInput    ${price}
+
+新增商品页:是否使用卡币
+    [Arguments]    ${boolean}
+    promoteRulesRadio    ${boolean}
+
+新增商品页:是否显示正品保证
+    [Arguments]    ${boolean}
+    showQualityRadio    ${boolean}
+
+新增商品页:是否可用优惠券
+    [Arguments]    ${boolean}
+    couponRadio    ${boolean}
+
+新增商品页:上传商品配图
+    [Arguments]    ${count}    @{pics}
+    picUploadButtom    ${count}    @{pics}
+    sleep    3
+
+新增商品页:编辑图文详情
+    [Arguments]    ${pics}
+    detailEdit    ${pics}
+
+新增关联按钮
+    script    window.scrollTo(0,150);
+    newAssociateButtom
+
+添加SKU一级属性
+    [Arguments]    ${attr_name}    @{attr}
+    firstAttrNamInput    ${attr_name}
+    firstAttrAdd    @{attr}
+
+添加SKU二级属性
+    [Arguments]    ${attr_name}    @{attr}
+    secondAttrNamInput    ${attr_name}
+    secondAttrAdd    @{attr}
+
+跳转Sku配置
+    nextSkuConfigButton
+
+单条配置sku
+    [Arguments]    ${firAttrNum}    ${firAttrTotalNum}    ${secAttrNum}    ${secAttrTotalNum}    ${price}    ${num}
+    ...    ${skuCode}    ${settle}    ${cost}    ${point}
+    skuInfoInput    ${firAttrNum}    ${firAttrTotalNum}    ${secAttrNum}    ${secAttrTotalNum}    ${price}    ${num}
+    ...    ${skuCode}    ${settle}    ${cost}    ${point}
+
+打开批量sku弹框
+    [Arguments]    ${firAttrNum}    ${firAttrTotalNum}    ${secAttrNum}    ${secAttrTotalNum}    ${settle}
+    skuInfoBatchButton    ${firAttrNum}    ${firAttrTotalNum}    ${secAttrNum}    ${secAttrNum}    ${settle}
+
+批量配置sku价格:所有SKU价格相同
+    skuInfoBatchPrice_All
+
+批量配置sku价格:一级属性相同SKU价格相同
+    skuInfoBatchPrice_FirAttr
+
+批量配置sku价格:二级属性相同SKU价格相同
+    skuInfoBatchPrice_SecAttr
+
+批量配置sku数量:所有SKU数量相同
+    skuInfoBatchNum_All
+
+批量配置sku数量:一级属性相同SKU数量相同
+    skuInfoBatchNum_FirAttr
+
+批量配置sku数量:二级属性相同SKU数量相同
+    skuInfoBatchNum_SecAttr
+
+批量配置sku成本:所有SKU成本相同
+    skuInfoBatchCost_All
+
+批量配置sku成本:一级属性相同SKU成本相同
+    skuInfoBatchCost_FirAttr
+
+批量配置sku成本:二级属性相同SKU成本相同
+    skuInfoBatchCost_SecAttr
+
+批量配置sku扣点:所有SKU扣点相同
+    skuInfoBatchRebate_All
+
+批量配置sku扣点:一级属性相同SKU扣点相同
+    skuInfoBatchRebate_FirAttr
+
+批量配置sku扣点:二级属性相同SKU扣点相同
+    skuInfoBatchRebate_SecAttr
+
+批量配置sku:清空
+    [Arguments]    ${settle}=${true}
+    skuInfoBatchClear    ${settle}
+
+批量配置sku:取消
+    [Arguments]    ${settle}=${true}
+    skuInfoBatchCancel    ${settle}
+
+批量配置sku:确认
+    [Arguments]    ${settle}=${true}
+    skuInfoBatchConfirm    ${settle}
+
+批量配置sku:配置完毕
+    ConfirmEndButton
+
+商品编辑页:获取商品名称
+    ${goodslname}    getGoodsLNameOfEdit
+    [Return]    ${goodslname}
+
+商品列表页：输入商品ID
+    [Arguments]    ${goodsId}
+    goodsIdInput    ${goodsId}
+
+商品列表页:输入商品长名称
+    [Arguments]    ${goodsIdLName}
+    goodsLNameInput    ${goodsIdLName}
+
+商品列表页：点击搜索
+    searchButton
+
+商品列表页:获取商品列表第一行的商品ID
+    getGoodsInfoId
+
+商品列表页:获取商品列表第一行的商品长名称
+    getGoodsInfoLName
+
+商品列表页:第一行商品上架
+    upButton
+
+提交审核
+    submitButton
+
+确定提交审核
+    upEnsureButton
+
+新增商品页:输入商品描述
+    [Arguments]    ${desc}
+    goodsDescInput    ${desc}
+
+新增商品页:输入商品广告
+    [Arguments]    ${adv}
+    goodsAdvInput    ${adv}
+
+新增商品页:输入sku名称
+    [Arguments]    ${desc}
+    skuDescInput    ${desc}
+
+新增商品页:一级商品分类
+    [Arguments]    ${first_type}
+    firstClassSelect    ${first_type}
+
+新增商品页:二级商品分类
+    [Arguments]    ${second_type}
+    secondClassSelect    ${second_type}
+
+新增商品页:输入商品品牌
+    [Arguments]    ${brand}
+    brandInput    ${brand}
+
+商品详情创建:是否邮寄
+    [Arguments]    ${is_free}
+    postRadio    ${is_free}
+
+商品详情创建:输入邮费
+    [Arguments]    ${post_price}
+    postPriceInput    ${post_price}
+
+商品详情创建:选择结算商户
+    [Arguments]    ${vendor}
+    vendorSelect    ${vendor}
+
+商品详情创建:是否支持退货
+    [Arguments]    ${refund}    ${role}
+    refundRadio    ${refund}    ${role}
+
+商品详情创建:是否结算
+    [Arguments]    ${settle}    ${role}
+    settleRadio    ${settle}    ${role}
+
+超级商品编辑:获取长名称
+    ${name}    getSupGoodsLNameOfEdit
+    [Return]    ${name}
+
+商品编辑页：获取商品id
+    ${goodsid}    get goods id of edit
+    [Return]    ${goodsid}

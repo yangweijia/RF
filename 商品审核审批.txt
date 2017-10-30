@@ -1,0 +1,14 @@
+*** Settings ***
+Resource          业务关键字/审核审批业务关键字.txt
+Library           Selenium2Library
+Resource          业务关键字/通用关键字.txt
+
+*** Test Cases ***
+testcase_002
+    [Setup]    login    boss_admin    Boss123    https://admin.codoon.com/admin/html/goods-manage/goods-approve.html
+    上架审核：输入商品ID    207294847944965982965662
+    上架审核：点击搜索按钮
+    通过首行审核
+    审核通过弹框确认
+    ${tips}    获取无更多数据的提示
+    Wait Until Page Contains Element    id=J_tip    error

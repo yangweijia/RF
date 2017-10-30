@@ -1,0 +1,25 @@
+*** Settings ***
+Library           ECommerce
+
+*** Keywords ***
+入库及库存管理
+    [Arguments]    ${mail}    ${skuId}    ${skunum}
+    stock_sku    ${mail}    ${skuId}    ${skunum}
+
+新建sku
+    [Arguments]    ${goods_lname}    ${goods_sname}    ${limit_count}    ${market_price}    ${product_guarantee}    ${sku_desc}
+    ...    ${pic}    ${detail}    @{sku}
+    new_sku    ${goods_lname}    ${goods_sname}    ${limit_count}    ${market_price}    ${product_guarantee}    ${sku_desc}
+    ...    ${pic}    ${detail}    @{sku}
+
+补充上架数量
+    [Arguments]    ${goodsId}    ${addNum}
+    add_list_num    ${goodsId}    ${addNum}
+
+商品搜索
+    [Arguments]    ${goodsId}
+    goods_search    ${goodsId}
+
+sku搜索
+    [Arguments]    ${skuId}
+    sku_search    ${skuId}

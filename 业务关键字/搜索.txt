@@ -1,0 +1,14 @@
+*** Settings ***
+Library           ECommerce
+
+*** Keywords ***
+输入订单ID
+    [Arguments]    ${id}
+    orderIdInput    ${id}
+
+输入商品ID或者超级商品ID
+    [Arguments]    ${id}
+    goodsIdInput    ${id}
+
+点击搜索按钮
+    searchButton

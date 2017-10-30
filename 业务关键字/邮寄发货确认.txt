@@ -1,0 +1,30 @@
+*** Settings ***
+Library           ECommerce
+
+*** Keywords ***
+输入订单ID
+    [Arguments]    ${id}
+    orderIdOfSearchInput    ${id}
+
+输入商品ID或者超级商品ID
+    [Arguments]    ${id}
+    goodsIdOfSearchInput    ${id}
+
+点击搜索
+    searchButton
+
+批量订单确认
+    batchConfirmButton
+
+点击确认批量订单按钮
+    confirmOfBatchButton
+
+获取提示
+    getTipText
+
+单个订单确认
+    singleConfirmButton
+
+获取确认订单的文案
+    ${tip}    getsingleConfirmText
+    [Return]    ${tip}

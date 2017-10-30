@@ -1,0 +1,12 @@
+*** Settings ***
+Library           ECommerce
+
+*** Keywords ***
+点击退货
+    refundButton
+
+点击确认
+    confirmButton
+
+获取提示
+    getTipText

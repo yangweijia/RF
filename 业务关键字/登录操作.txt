@@ -1,0 +1,10 @@
+*** Settings ***
+Library           ECommerce
+
+*** Keywords ***
+登录
+    [Arguments]    ${name}    ${pwd}    ${url}=
+    login    ${name}     ${pwd}     ${url} \
+
+退出登录
+    logout

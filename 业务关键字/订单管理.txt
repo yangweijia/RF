@@ -1,0 +1,37 @@
+*** Settings ***
+Library           ECommerceLibrary
+
+*** Keywords ***
+点击退款
+    refundButton
+
+选择数量
+    [Arguments]    @{numbers}
+    refundNumSelec    @{numbers}
+
+输入退款金额
+    [Arguments]    ${fee}
+    refundFeeInput    ${fee}
+
+输入退款原因
+    [Arguments]    ${reason}
+    refundReasonInput    ${reason}
+
+输入物流公司
+    [Arguments]    ${mailCompany}
+    mailCompanyInput    ${mailCompany}
+
+输入退货单号
+    [Arguments]    ${mailNum}
+    mailNumInput    ${mailNum}
+
+点击确认退款
+    [Arguments]    ${completeRefund}
+    confirmOfRefundButton    ${completeRefund}
+
+点击确认退货
+    [Arguments]    ${completeRefund}
+    confirmOfReturnButton    ${completeRefund}
+
+获取提示
+    getTipText

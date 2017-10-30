@@ -1,0 +1,26 @@
+*** Settings ***
+Library           ECommerceLibrary
+
+*** Keywords ***
+输入商品ID
+    [Arguments]    ${goodsId}
+    goodsIdInput    ${goodsId}
+
+点击搜索按钮
+    searchButton
+
+上架审核：取首行商品ID
+    getGoodsInfoId
+
+上架审核：获取首行商品长名称
+    [Arguments]    ${goodsIdLName}
+    goodsLNameInput    ${goodsIdLName}
+
+通过审核
+    passButton
+
+确认通过审核
+    confirmOfPassButton
+
+获取无更多数据的提示
+    getTip

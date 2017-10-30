@@ -1,0 +1,124 @@
+*** Settings ***
+Resource          业务关键字/商品管理.txt
+Resource          业务关键字/通用关键字.txt
+Library           ECommerceLibrary
+Library           Selenium2Library
+Resource          业务关键字/上架审批.txt
+Resource          业务关键字/登录操作.txt
+Resource          用户关键字/搜索.txt
+Resource          业务关键字/邮寄发货确认.txt
+Resource          业务关键字/邮寄发货管理.txt
+Resource          业务关键字/订单管理.txt
+
+*** Variables ***
+${url}            https://admin.codoon.com/admin/html/item-creator-test.html#!new
+${thirdBoss}      thirdBoss
+${subThirdBoss}    subThirdBoss
+${thirdManage}    thirdManage
+${thirdOper}      thirdOper
+${selfBoss}       selfBoss
+${selfManage}     selfManage
+${selfOper}       selfOper
+${oper}           oper
+${superDev}       superDev
+${service}        service
+
+*** Test Cases ***
+创建普通商品-提交审核-审核通过
+    [Documentation]    1.三方商户创建普通商品
+    ...    2.三方商户提交审核
+    ...    3.三方BOSS审核通过
+    登录    admin    admin    ${url}
+    窗口全屏
+    新增商品页:输入商品名称    普通跑鞋
+    新增商品页:输入商品描述    智能连接
+    新增商品页:输入sku名称    颜色
+    新增商品页:输入市场价    99.99
+    新增商品页:上传商品配图    2    ${CURDIR}/picture/1.png    ${CURDIR}/picture/2.png
+    新增商品页:一级商品分类    颜色
+    新增商品页:二级商品分类    黑色
+    新增商品页:输入商品品牌    阿迪达斯
+    新增关联按钮
+    #Sku构建
+    添加SKU一级属性    颜色    红色    翠绿
+    跳转Sku配置
+    单条配置sku    ${1}    ${2}    ${0}    ${0}    ${1}    ${50}
+    ...    ${none}    ${true}    ${none}    50
+    # 批量sku
+    打开批量sku弹框    ${1}    ${2}    ${0}    ${0}    ${true}
+    批量配置sku价格:所有SKU价格相同
+    批量配置sku数量:所有SKU数量相同
+    批量配置sku扣点:所有SKU扣点相同
+    批量配置sku:确认
+    批量配置sku:配置完毕
+    sleep    5
+    ${id}    商品编辑页：获取商品id
+    go to url    https://admin.codoon.com/admin/html/goods-manage/goods-list.html
+    商品列表页：输入商品ID    ${id}
+    商品列表页：点击搜索
+    提交审核
+    确定提交审核
+    sleep    2
+    退出登录
+    sleep    5
+    登录    boss_admin    Boss123    https://admin.codoon.com/admin/html/goods-manage/goods-approve.html
+    输入商品ID    ${id}
+    点击搜索按钮
+    通过审核
+    确认通过审核
+
+单个确认-单个发货
+    登录    zytest    Test123456    https://admin.codoon.com/admin/html/inventory/order-deliver-confirm.html
+    窗口全屏
+    go to url    https://admin.codoon.com/admin/html/inventory/order-deliver-ms.html
+    sleep    3
+    搜索订单ID    333360999351937182955904
+    点击发货按钮
+    sleep    3
+    邮寄发货管理.选择数量    1    1    1
+    输入快递公司    韵达
+    输入快递费用    10
+    输入快递单号    MM
+    点击确认按钮
+
+退款
+    登录    zytest    Test123456    https://admin.codoon.com/admin/html/order/order-ms.html
+    窗口全屏
+    搜索订单ID    327212562551936715557818
+    sleep    3
+    点击退款
+    订单管理.选择数量    1
+    输入退款原因    不想要了
+    点击确认退款    ${true}
+
+退货申请
+    登录    wy    Aa123456    https://admin.codoon.com/admin/html/order/order-ms.html
+    窗口全屏
+    搜索订单ID    219011193851871276049849
+    sleep    3
+    点击退款
+    订单管理.选择数量    1
+    输入物流公司    韵达
+    输入退货单号    NN
+    输入退款原因
+    点击确认退货    false
+    搜索订单ID    333360999351937182955904
+    单个订单确认
+    ${tip}    获取确认订单的文案
+    断言-等于    ${tip}    发货
+
+提交审核
+    登录    wy    Aa123456    https://admin.codoon.com/admin/html/goods-manage/goods-list.html
+    窗口全屏
+    搜索商品ID    81232532752109527786516
+    提交审核
+    确定提交审核
+    退出登录
+
+审核商品
+    登录    boss_admin    Boss123    https://admin.codoon.com/admin/html/goods-manage/goods-approve.html
+    窗口全屏
+    搜索商品ID    81232532752109527786516
+    通过审核
+    确认通过审核
+    退出登录
